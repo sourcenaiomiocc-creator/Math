@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividades - Matemática Kids</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="atividades.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="home.html" class="btn-back">← Voltar</a>
+            <span id="islandName">🏝️ Ilha das Operações</span>
+        </div>
+        <div class="nav-user">
+            <div class="user-stats">
+                <span class="stat-item">⭐ <span id="pontos">0</span></span>
+                <span class="stat-item">❤️ <span id="vidas">3</span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="atividade-container">
+        <!-- Tela de Seleção de Atividades -->
+        <div id="selecaoAtividades" class="selecao-screen">
+            <h2>Escolha uma Atividade</h2>
+
+            <div class="atividades-grid" id="atividadesGrid">
+                <!-- As atividades serão carregadas dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Tela de Atividade -->
+        <div id="atividadeScreen" class="atividade-screen hidden">
+            <div class="atividade-header">
+                <div class="atividade-info">
+                    <h3 id="atividadeTitulo">Atividade</h3>
+                    <div class="progress-mini">
+                        <span id="questaoAtual">1</span> / <span id="totalQuestoes">10</span>
+                    </div>
+                </div>
+                <div class="streak-counter">
+                    🔥 <span id="streakCount">0</span> seguidos
+                </div>
+            </div>
+
+            <div class="questao-container">
+                <div class="questao-card">
+                    <div class="questao-texto" id="questaoTexto">
+                        <!-- Questão será carregada aqui -->
+                    </div>
+
+                    <div class="questao-visual" id="questaoVisual">
+                        <!-- Elementos visuais da questão -->
+                    </div>
+
+                    <div class="opcoes-resposta" id="opcoesResposta">
+                        <!-- Opções de resposta -->
+                    </div>
+
+                    <div class="resposta-input hidden" id="respostaInput">
+                        <input type="number" id="inputResposta" placeholder="Digite sua resposta">
+                        <button class="btn-confirmar" id="btnConfirmar">Confirmar ✓</button>
+                    </div>
+                </div>
+
+                <!-- Feedback da resposta -->
+                <div class="feedback-container hidden" id="feedbackContainer">
+                    <div class="feedback-card">
+                        <div class="feedback-icon" id="feedbackIcon">🎉</div>
+                        <h3 id="feedbackTitulo">Muito bem!</h3>
+                        <p id="feedbackMensagem">Resposta correta! Continue assim!</p>
+                        <div class="feedback-pontos" id="feedbackPontos">+10 XP</div>
+                        <button class="btn-proximo" id="btnProximo">Próxima Questão →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mascote de ajuda -->
+            <div class="mascot-ajuda" id="mascotAjuda">
+                <div class="mascot-icon">🦊</div>
+                <button class="btn-dica" id="btnDica">💡 Precisa de uma dica?</button>
+            </div>
+        </div>
+
+        <!-- Tela de Resultado Final -->
+        <div id="resultadoScreen" class="resultado-screen hidden">
+            <div class="resultado-card">
+                <div class="resultado-header">
+                    <div class="resultado-icon" id="resultadoIcon">🏆</div>
+                    <h2 id="resultadoTitulo">Parabéns!</h2>
+                </div>
+
+                <div class="resultado-stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="acertosTotal">0</div>
+                        <div class="stat-label">Acertos</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="errosTotal">0</div>
+                        <div class="stat-label">Erros</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="xpGanho">0</div>
+                        <div class="stat-label">XP Ganho</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="estrelasGanhas">⭐⭐⭐</div>
+                        <div class="stat-label">Estrelas</div>
+                    </div>
+                </div>
+
+                <div class="conquistas-desbloqueadas" id="conquistasDesbloqueadas">
+                    <!-- Conquistas desbloqueadas aparecerão aqui -->
+                </div>
+
+                <div class="resultado-acoes">
+                    <button class="btn-refazer" id="btnRefazer">🔄 Refazer Atividade</button>
+                    <button class="btn-voltar-ilhas" id="btnVoltarIlhas">🏝️ Voltar para Ilhas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Dica -->
+    <div id="dicaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>💡 Dica do Fox</h3>
+            <div class="dica-content" id="dicaContent">
+                <!-- Dica será carregada aqui -->
+            </div>
+            <button class="btn-primary" id="btnFecharDica">Entendi!</button>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Carregando atividade...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="utils.js"></script>
+    <script src="gamificacao.js"></script>
+    <script src="questoes.js"></script>
+    <script src="atividades.js"></script>
+</body>
+</html>

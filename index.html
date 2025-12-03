@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemática Kids - Aprender Brincando!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <div class="logo-container">
+                <h1 class="logo">🎮 Matemática Kids</h1>
+                <p class="tagline">Aprender matemática nunca foi tão divertido!</p>
+            </div>
+
+            <div class="character-animation">
+                <div class="character">🦊</div>
+                <p class="character-speech">Olá! Eu sou o Fox, vou te ajudar a se tornar um expert em matemática!</p>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <div class="login-card">
+                <h2>Começar Aventura</h2>
+
+                <form id="nomeForm">
+                    <div class="form-group">
+                        <label for="nome">
+                            <span class="label-icon">👤</span>
+                            Qual é o seu nome?
+                        </label>
+                        <input type="text" id="nome" required placeholder="Digite seu nome" autofocus>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Começar Aventura! 🚀
+                    </button>
+                </form>
+
+                <div class="form-footer" style="margin-top: 20px;">
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                        Seu progresso será salvo automaticamente neste navegador
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <script src="utils.js"></script>
+    <script>
+        // Redirecionar direto para a área do aluno
+        document.getElementById('nomeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value.trim();
+
+            if (nome) {
+                // Salvar nome no localStorage
+                localStorage.setItem('nomeAluno', nome);
+
+                // Inicializar dados se não existir
+                if (!localStorage.getItem('dadosAluno')) {
+                    const dadosIniciais = {
+                        nome: nome,
+                        pontos: 0,
+                        nivel: 1,
+                        xp: 0,
+                        vidas: 3,
+                        conquistas: [],
+                        estatisticas: {
+                            totalAtividades: 0,
+                            totalAcertos: 0,
+                            totalErros: 0,
+                            taxaAcerto: 0,
+                            tempoTotal: 0
+                        }
+                    };
+                    localStorage.setItem('dadosAluno', JSON.stringify(dadosIniciais));
+                }
+
+                // Redirecionar
+                window.location.href = 'home.html';
+            }
+        });
+
+        // Se já tem nome salvo, redirecionar automaticamente
+        if (localStorage.getItem('nomeAluno')) {
+            document.getElementById('nome').value = localStorage.getItem('nomeAluno');
+        }
+    </script>
+</body>
+</html>

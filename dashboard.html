@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Matemática Kids</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">📊 Dashboard - Matemática Kids</div>
+        <div class="nav-user">
+            <span id="professorNome">Professor</span>
+            <button class="btn-logout" id="btnSair">Sair</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <button class="menu-item active" data-view="visao-geral">
+                    <span class="icon">📈</span>
+                    <span>Visão Geral</span>
+                </button>
+                <button class="menu-item" data-view="alunos">
+                    <span class="icon">👥</span>
+                    <span>Alunos</span>
+                </button>
+                <button class="menu-item" data-view="relatorios">
+                    <span class="icon">📄</span>
+                    <span>Relatórios</span>
+                </button>
+                <button class="menu-item" data-view="conquistas">
+                    <span class="icon">🏆</span>
+                    <span>Conquistas</span>
+                </button>
+                <button class="menu-item" data-view="configuracoes">
+                    <span class="icon">⚙️</span>
+                    <span>Configurações</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Visão Geral -->
+            <section id="visao-geral" class="view-section active">
+                <h1>Visão Geral</h1>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="totalAlunos">0</div>
+                            <div class="stat-label">Alunos Ativos</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="atividadesCompletas">0</div>
+                            <div class="stat-label">Atividades Completas</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="mediaEstrelas">0</div>
+                            <div class="stat-label">Média de Estrelas</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="taxaAcerto">0%</div>
+                            <div class="stat-label">Taxa de Acerto</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Atividades por Ilha</h3>
+                        <div id="chartIlhas" class="chart-container">
+                            <!-- Gráfico será renderizado aqui -->
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <h3>Progresso Semanal</h3>
+                        <div id="chartSemanal" class="chart-container">
+                            <!-- Gráfico será renderizado aqui -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Atividade Recente</h3>
+                    <div id="atividadeRecente" class="activity-list">
+                        <!-- Atividades recentes serão listadas aqui -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Alunos -->
+            <section id="alunos" class="view-section">
+                <div class="section-header">
+                    <h1>Alunos</h1>
+                    <button class="btn-primary" id="btnAdicionarAluno">+ Adicionar Aluno</button>
+                </div>
+
+                <div class="search-box">
+                    <input type="text" id="searchAluno" placeholder="🔍 Buscar aluno...">
+                </div>
+
+                <div class="alunos-grid" id="alunosGrid">
+                    <!-- Lista de alunos será carregada aqui -->
+                </div>
+            </section>
+
+            <!-- Relatórios -->
+            <section id="relatorios" class="view-section">
+                <h1>Relatórios Detalhados</h1>
+
+                <div class="filters">
+                    <select id="filtroAluno">
+                        <option value="">Todos os alunos</option>
+                    </select>
+
+                    <select id="filtroPeriodo">
+                        <option value="7">Últimos 7 dias</option>
+                        <option value="30">Últimos 30 dias</option>
+                        <option value="90">Últimos 3 meses</option>
+                    </select>
+
+                    <button class="btn-secondary" id="btnGerarRelatorio">Gerar Relatório</button>
+                    <button class="btn-secondary" id="btnExportarPDF">📄 Exportar PDF</button>
+                </div>
+
+                <div id="relatorioContainer" class="relatorio-container">
+                    <!-- Relatório será exibido aqui -->
+                </div>
+            </section>
+
+            <!-- Conquistas -->
+            <section id="conquistas" class="view-section">
+                <h1>Sistema de Conquistas</h1>
+
+                <div class="conquistas-info">
+                    <p>Acompanhe as conquistas desbloqueadas pelos alunos e veja quais são as mais comuns e raras.</p>
+                </div>
+
+                <div class="conquistas-grid" id="conquistasGrid">
+                    <!-- Conquistas serão listadas aqui -->
+                </div>
+            </section>
+
+            <!-- Configurações -->
+            <section id="configuracoes" class="view-section">
+                <h1>Configurações</h1>
+
+                <div class="config-card">
+                    <h3>Perfil</h3>
+                    <form id="perfilForm">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" id="configNome" placeholder="Seu nome">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="configEmail" placeholder="seu@email.com" disabled>
+                        </div>
+                        <button type="submit" class="btn-primary">Salvar Alterações</button>
+                    </form>
+                </div>
+
+                <div class="config-card">
+                    <h3>Notificações</h3>
+                    <div class="config-toggle">
+                        <label>
+                            <input type="checkbox" id="notifProgresso" checked>
+                            <span>Notificar progresso dos alunos</span>
+                        </label>
+                    </div>
+                    <div class="config-toggle">
+                        <label>
+                            <input type="checkbox" id="notifConquistas" checked>
+                            <span>Notificar novas conquistas</span>
+                        </label>
+                    </div>
+                    <div class="config-toggle">
+                        <label>
+                            <input type="checkbox" id="notifDificuldades">
+                            <span>Alertar sobre dificuldades detectadas</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Detalhes do Aluno -->
+    <div id="alunoModal" class="modal">
+        <div class="modal-content large">
+            <span class="close">&times;</span>
+            <div id="alunoDetalhes">
+                <!-- Detalhes do aluno serão carregados aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Carregando...</p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="utils.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

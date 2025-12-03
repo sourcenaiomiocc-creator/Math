@@ -1,0 +1,246 @@
+/* ============================================
+   ESTILOS DA PÁGINA DE LOGIN
+   ============================================ */
+
+.container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+    padding: 32px;
+}
+
+/* Seção de Boas-Vindas */
+.welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    color: white;
+}
+
+.logo-container {
+    text-align: center;
+}
+
+.logo {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tagline {
+    font-size: 1.5rem;
+    font-weight: 300;
+    opacity: 0.95;
+}
+
+/* Animação do Personagem */
+.character-animation {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.character {
+    font-size: 8rem;
+    margin-bottom: 16px;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+.character-speech {
+    font-size: 1.1rem;
+    font-weight: 500;
+    background: white;
+    color: var(--text-primary);
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    position: relative;
+    box-shadow: var(--shadow-md);
+}
+
+.character-speech::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid white;
+}
+
+/* Seção de Login */
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 480px;
+}
+
+.login-card h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 32px;
+}
+
+/* Seletor de Tipo de Usuário */
+.user-type-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.user-type-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    border: 3px solid var(--bg-primary);
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-weight: 600;
+}
+
+.user-type-btn .icon {
+    font-size: 2.5rem;
+}
+
+.user-type-btn:hover {
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.user-type-btn.active {
+    border-color: var(--secondary-color);
+    background: rgba(78, 205, 196, 0.1);
+    color: var(--secondary-color);
+}
+
+/* Formulário */
+#loginForm {
+    margin-bottom: 24px;
+}
+
+#loginForm .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 1.1rem;
+}
+
+.form-footer {
+    text-align: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--bg-primary);
+}
+
+.form-footer a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-fast);
+}
+
+.form-footer a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Modal de Cadastro */
+#cadastroModal .modal-content {
+    max-width: 500px;
+}
+
+#cadastroForm .form-group {
+    margin-bottom: 20px;
+}
+
+#cadastroForm .btn-primary {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .welcome-section {
+        order: 2;
+    }
+
+    .login-section {
+        order: 1;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+
+    .character {
+        font-size: 6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+
+    .login-card {
+        padding: 32px 24px;
+    }
+
+    .user-type-selector {
+        grid-template-columns: 1fr;
+    }
+
+    .character-animation {
+        padding: 24px;
+    }
+}

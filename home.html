@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Aventura Matemática</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="aluno.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🎮 Matemática Kids</div>
+        <div class="nav-user">
+            <div class="user-stats">
+                <span class="stat-item">⭐ <span id="pontos">0</span></span>
+                <span class="stat-item">🏆 Nível <span id="nivel">1</span></span>
+            </div>
+            <button class="btn-profile" id="btnPerfil">
+                <span id="userName">Aluno</span> 👤
+            </button>
+            <a href="estatisticas.html" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-right: 12px;">
+                📊 Estatísticas
+            </a>
+            <button class="btn-logout" id="btnSair">Sair</button>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Área de Progresso -->
+        <section class="progress-section">
+            <div class="welcome-message">
+                <h1>Olá, <span id="nomeAluno">Explorador</span>! 👋</h1>
+                <p>Continue sua jornada matemática! Você está indo muito bem!</p>
+            </div>
+
+            <div class="progress-card">
+                <h3>Seu Progresso</h3>
+                <div class="level-progress">
+                    <div class="level-info">
+                        <span>Nível <span id="nivelAtual">1</span></span>
+                        <span><span id="xpAtual">0</span> / <span id="xpProximo">100</span> XP</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="conquistas-preview">
+                    <h4>🏆 Conquistas Recentes</h4>
+                    <div class="conquistas-list" id="conquistasRecentes">
+                        <div class="conquista-item locked">
+                            <span class="conquista-icon">🌟</span>
+                            <span class="conquista-nome">Primeira Atividade</span>
+                        </div>
+                        <div class="conquista-item locked">
+                            <span class="conquista-icon">🔥</span>
+                            <span class="conquista-nome">Sequência de 3 dias</span>
+                        </div>
+                        <div class="conquista-item locked">
+                            <span class="conquista-icon">🎯</span>
+                            <span class="conquista-nome">10 Acertos Seguidos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ilhas de Atividades -->
+        <section class="islands-section">
+            <h2>🏝️ Escolha sua Aventura Matemática</h2>
+
+            <div class="islands-container">
+                <!-- Ilha 1: Operações Básicas -->
+                <div class="island-card" data-island="operacoes-basicas">
+                    <div class="island-header">
+                        <span class="island-icon">➕</span>
+                        <h3>Ilha das Operações</h3>
+                    </div>
+                    <p class="island-description">
+                        Aprenda adição, subtração, multiplicação e divisão de forma divertida!
+                    </p>
+                    <div class="island-stats">
+                        <span>📊 <span class="completadas">0</span>/20 atividades</span>
+                        <span>⭐ <span class="estrelas">0</span>/60 estrelas</span>
+                    </div>
+                    <button class="btn-island">Explorar Ilha 🚀</button>
+                </div>
+
+                <!-- Ilha 2: Senso Numérico -->
+                <div class="island-card" data-island="senso-numerico">
+                    <div class="island-header">
+                        <span class="island-icon">🔢</span>
+                        <h3>Ilha dos Números</h3>
+                    </div>
+                    <p class="island-description">
+                        Domine comparação, ordenação e estimativas numéricas!
+                    </p>
+                    <div class="island-stats">
+                        <span>📊 <span class="completadas">0</span>/15 atividades</span>
+                        <span>⭐ <span class="estrelas">0</span>/45 estrelas</span>
+                    </div>
+                    <button class="btn-island">Explorar Ilha 🚀</button>
+                </div>
+
+                <!-- Ilha 3: Resolução de Problemas -->
+                <div class="island-card" data-island="problemas">
+                    <div class="island-header">
+                        <span class="island-icon">🧩</span>
+                        <h3>Ilha dos Desafios</h3>
+                    </div>
+                    <p class="island-description">
+                        Resolva problemas do dia a dia usando matemática!
+                    </p>
+                    <div class="island-stats">
+                        <span>📊 <span class="completadas">0</span>/18 atividades</span>
+                        <span>⭐ <span class="estrelas">0</span>/54 estrelas</span>
+                    </div>
+                    <button class="btn-island">Explorar Ilha 🚀</button>
+                </div>
+
+                <!-- Ilha 4: Geometria -->
+                <div class="island-card" data-island="geometria">
+                    <div class="island-header">
+                        <span class="island-icon">📐</span>
+                        <h3>Ilha das Formas</h3>
+                    </div>
+                    <p class="island-description">
+                        Descubra o mundo das formas, espaços e medidas!
+                    </p>
+                    <div class="island-stats">
+                        <span>📊 <span class="completadas">0</span>/12 atividades</span>
+                        <span>⭐ <span class="estrelas">0</span>/36 estrelas</span>
+                    </div>
+                    <button class="btn-island">Explorar Ilha 🚀</button>
+                </div>
+
+                <!-- Ilha 5: Jogos Livres -->
+                <div class="island-card special" data-island="jogos-livres">
+                    <div class="island-header">
+                        <span class="island-icon">🎮</span>
+                        <h3>Parque de Diversões</h3>
+                    </div>
+                    <p class="island-description">
+                        Jogos divertidos sem pressão! Apenas diversão e aprendizado!
+                    </p>
+                    <div class="island-stats">
+                        <span>🎯 Modo Livre</span>
+                    </div>
+                    <button class="btn-island special">Jogar Agora 🎉</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mascote Helper -->
+        <div class="mascot-helper" id="mascotHelper">
+            <div class="mascot">🦊</div>
+            <div class="mascot-message" id="mascotMessage">
+                Clique em uma ilha para começar sua aventura!
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="utils.js"></script>
+    <script src="gamificacao.js"></script>
+    <script src="aluno-home.js"></script>
+</body>
+</html>
