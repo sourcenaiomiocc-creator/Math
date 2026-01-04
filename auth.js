@@ -118,14 +118,39 @@ async function handleCadastro(e) {
     const idade = document.getElementById('cadastro-idade')?.value;
 
     // Validações
-    if (senha.length < 6) {
-        mostrarErro('A senha deve ter no mínimo 6 caracteres');
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        mostrarErro('Por favor, informe um email válido');
         return;
     }
 
-    if (tipoUsuarioSelecionado === 'aluno' && (!idade || idade < 5 || idade > 15)) {
-        mostrarErro('Por favor, informe uma idade válida (5-15 anos)');
+    // Password strength validation (NIST guidelines: minimum 12 characters)
+    if (senha.length < 12) {
+        mostrarErro('A senha deve ter no mínimo 12 caracteres para sua segurança');
         return;
+    }
+
+    // Check for common weak passwords
+    const weakPasswords = ['123456789012', 'password1234', 'qwerty123456'];
+    if (weakPasswords.includes(senha.toLowerCase())) {
+        mostrarErro('Esta senha é muito comum. Por favor, escolha uma senha mais segura');
+        return;
+    }
+
+    // Name validation
+    if (!nome || nome.trim().length < 2 || nome.length > 100) {
+        mostrarErro('Por favor, informe um nome válido (2-100 caracteres)');
+        return;
+    }
+
+    // Age validation (client-side, also enforced server-side in Firestore Rules)
+    if (tipoUsuarioSelecionado === 'aluno') {
+        const idadeNum = parseInt(idade);
+        if (!idade || isNaN(idadeNum) || idadeNum < 5 || idadeNum > 18) {
+            mostrarErro('Por favor, informe uma idade válida (5-18 anos)');
+            return;
+        }
     }
 
     mostrarLoading(true);
@@ -249,19 +274,28 @@ function fecharModalCadastro() {
 
 /**
  * Tratar erros do Firebase
+ * Uses generic messages to prevent user enumeration attacks
  */
 function tratarErroFirebase(error) {
+    // Log error details for debugging (server-side only in production)
+    console.error('Firebase Auth Error:', error.code, error.message);
+
     const erros = {
         'auth/email-already-in-use': 'Este email já está cadastrado',
         'auth/invalid-email': 'Email inválido',
-        'auth/weak-password': 'Senha muito fraca',
-        'auth/user-not-found': 'Usuário não encontrado',
-        'auth/wrong-password': 'Senha incorreta',
-        'auth/too-many-requests': 'Muitas tentativas. Tente novamente mais tarde',
-        'auth/network-request-failed': 'Erro de conexão. Verifique sua internet'
+        'auth/weak-password': 'Senha muito fraca. Use pelo menos 12 caracteres',
+
+        // Generic messages to prevent account enumeration
+        'auth/user-not-found': 'Email ou senha incorretos',
+        'auth/wrong-password': 'Email ou senha incorretos',
+
+        'auth/too-many-requests': 'Muitas tentativas. Aguarde alguns minutos e tente novamente',
+        'auth/network-request-failed': 'Erro de conexão. Verifique sua internet',
+        'auth/operation-not-allowed': 'Operação não permitida. Contate o suporte',
+        'auth/user-disabled': 'Esta conta foi desativada. Contate o suporte'
     };
 
-    return erros[error.code] || 'Erro desconhecido. Tente novamente';
+    return erros[error.code] || 'Erro na autenticação. Verifique seus dados e tente novamente';
 }
 
 /**

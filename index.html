@@ -3,7 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
     <title>Matemática Kids - Aprender Brincando!</title>
+    <meta name="description" content="Plataforma educacional gamificada para aprender matemática de forma divertida. Sistema de pontos, conquistas e atividades interativas para crianças.">
+    <meta name="keywords" content="matemática, educação, crianças, jogos educativos, aprendizado, gamificação">
+    <meta name="author" content="Matemática Kids">
+    <meta name="theme-color" content="#4CAF50">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/sourcenaiomiocc-creator/Math">
+    <meta property="og:title" content="Matemática Kids - Aprender Brincando!">
+    <meta property="og:description" content="Plataforma educacional gamificada para aprender matemática de forma divertida com sistema de pontos e conquistas.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Matemática Kids - Aprender Brincando!">
+    <meta property="twitter:description" content="Plataforma educacional gamificada para aprender matemática de forma divertida.">
+
+    <!-- Favicon (placeholder) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="login.css">
 </head>
@@ -16,8 +37,8 @@
             </div>
 
             <div class="character-animation">
-                <div class="character">🦊</div>
-                <p class="character-speech">Olá! Eu sou o Fox, vou te ajudar a se tornar um expert em matemática!</p>
+                <div class="character" role="img" aria-label="Raposa mascote Fox">🦊</div>
+                <p class="character-speech" role="status">Olá! Eu sou o Fox, vou te ajudar a se tornar um expert em matemática!</p>
             </div>
         </div>
 
@@ -25,17 +46,29 @@
             <div class="login-card">
                 <h2>Começar Aventura</h2>
 
-                <form id="nomeForm">
+                <form id="nomeForm" aria-label="Formulário de início">
                     <div class="form-group">
                         <label for="nome">
-                            <span class="label-icon">👤</span>
+                            <span class="label-icon" aria-hidden="true">👤</span>
                             Qual é o seu nome?
                         </label>
-                        <input type="text" id="nome" required placeholder="Digite seu nome" autofocus>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            required
+                            placeholder="Digite seu nome"
+                            autofocus
+                            maxlength="100"
+                            pattern="[A-Za-zÀ-ÿ\s]+"
+                            title="Digite apenas letras e espaços"
+                            aria-required="true"
+                            aria-describedby="nome-hint">
+                        <span id="nome-hint" class="sr-only">Digite seu nome completo usando apenas letras</span>
                     </div>
 
-                    <button type="submit" class="btn-primary">
-                        Começar Aventura! 🚀
+                    <button type="submit" class="btn-primary" aria-label="Começar aventura de aprendizado">
+                        Começar Aventura! <span aria-hidden="true">🚀</span>
                     </button>
                 </form>
 
@@ -48,8 +81,8 @@
         </div>
     </div>
 
-    <div id="loading" class="loading hidden">
-        <div class="spinner"></div>
+    <div id="loading" class="loading hidden" role="status" aria-live="polite" aria-label="Carregando">
+        <div class="spinner" aria-hidden="true"></div>
         <p>Carregando...</p>
     </div>
 

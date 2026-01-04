@@ -24,6 +24,7 @@ yarn-error.log*
 .firebaserc
 firebase-debug.log
 firestore-debug.log
+firebase-config.js
 
 # Build
 dist/

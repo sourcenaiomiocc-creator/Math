@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidAge(age) {
+      return age is number && age >= 5 && age <= 18;
+    }
+
+    function isValidUserType(type) {
+      return type in ['aluno', 'professor'];
+    }
+
+    // Users collection
+    match /users/{userId} {
+      // Users can read their own data
+      allow read: if isOwner(userId);
+
+      // Users can create their own profile
+      allow create: if isOwner(userId)
+                    && request.resource.data.keys().hasAll(['nome', 'email', 'tipo'])
+                    && isValidUserType(request.resource.data.tipo)
+                    && (!request.resource.data.keys().hasAny(['idade']) || isValidAge(request.resource.data.idade));
+
+      // Users can update their own data (except email and tipo)
+      allow update: if isOwner(userId)
+                    && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['email', 'tipo']);
+
+      // No deletion allowed
+      allow delete: if false;
+    }
+
+    // Alunos collection - student game data
+    match /alunos/{userId} {
+      // Students can read their own data
+      allow read: if isOwner(userId);
+
+      // Students can create their initial profile
+      allow create: if isOwner(userId)
+                    && request.resource.data.keys().hasAll(['pontos', 'nivel', 'xp', 'vidas'])
+                    && request.resource.data.pontos is number
+                    && request.resource.data.nivel is number
+                    && request.resource.data.xp is number
+                    && request.resource.data.vidas is number;
+
+      // Students can update their data with validation
+      allow update: if isOwner(userId)
+                    && (request.resource.data.pontos is number && request.resource.data.pontos >= 0)
+                    && (request.resource.data.nivel is number && request.resource.data.nivel >= 1)
+                    && (request.resource.data.xp is number && request.resource.data.xp >= 0)
+                    && (request.resource.data.vidas is number && request.resource.data.vidas >= 0 && request.resource.data.vidas <= 5);
+
+      allow delete: if false;
+    }
+
+    // Atividades collection - activity history
+    match /atividades/{userId} {
+      // Users can read their own activity history
+      allow read: if isOwner(userId);
+
+      // Users can create/update their activity records
+      allow create, update: if isOwner(userId)
+                            && request.resource.data.historico is list
+                            && request.resource.data.historico.size() < 1000; // Limit history size
+
+      allow delete: if false;
+    }
+
+    // Ilhas collection - game islands (read-only for users)
+    match /ilhas/{ilhaId} {
+      // Anyone can read island data
+      allow read: if isAuthenticated();
+
+      // Only allow writes from admin (not from client)
+      allow write: if false;
+    }
+
+    // Conquistas collection - achievements (read-only for users)
+    match /conquistas/{conquistaId} {
+      // Anyone can read achievements
+      allow read: if isAuthenticated();
+
+      // Only allow writes from admin
+      allow write: if false;
+    }
+  }
+}
