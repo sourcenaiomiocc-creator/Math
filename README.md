@@ -171,11 +171,11 @@ conquistas/
 
 ## 📝 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Por favor, leia `CONTRIBUTING.md` para detalhes sobre nosso código de conduta e processo de submissão de pull requests.
+Contribuições são bem-vindas! Por favor, leia [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre nosso código de conduta e processo de submissão de pull requests.
 
 ## 📧 Contato
 
